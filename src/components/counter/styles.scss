@@ -1,0 +1,24 @@
+:local(.styles) {
+  display: inline-flex;
+  flex-direction: column;
+
+  & > .value-wrapper {
+    min-width: 50px;
+    width: 50px;
+    max-width: 50px;
+    min-height: 50px;
+    height: 50px;
+    max-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px solid blue;
+  }
+
+  & > .controls-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

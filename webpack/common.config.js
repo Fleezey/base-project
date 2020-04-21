@@ -5,20 +5,12 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
-  mode: 'development',
-  devtool: 'eval-source-map',
   target: 'web',
   
-  entry: [
-    'react-hot-loader/patch',
-    path.resolve(__dirname, '../src/index.js'),
-    'webpack-hot-middleware/client',
-  ],
-
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
+    publicPath: path.resolve(__dirname, '../dist'),
   },
 
   optimization: {
@@ -51,26 +43,20 @@ module.exports = {
     modules: ['node_modules', path.join(__dirname, '../src')],
   },
 
-  devServer: {
-    contentBase: path.resolve(__dirname, '../dist'),
-    historyApiFallback: true,
-    hot: true,
-  },
-
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.html$/,
         use: {
-          loader: 'html-loader'
-        }
+          loader: 'html-loader',
+        },
       },
       {
         test: /\.css$/,
@@ -80,7 +66,7 @@ module.exports = {
             options: { hmr: true },
           },
           { loader: 'css-loader', options: { modules: { localIdentName: '[path][name]--[local]' } } },
-        ]
+        ],
       },
       {
         test: /\.scss$/,
@@ -90,32 +76,35 @@ module.exports = {
             options: { hmr: true },
           },
           { loader: 'css-loader', options: { modules: { localIdentName: '[path][name]--[local]' } } },
-          { loader: 'sass-loader' }
-        ]
+          { loader: 'sass-loader' },
+        ],
       },
       {
         test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         use: {
-          loader: 'url-loader?limit=10000'
-        }
+          loader: 'url-loader?limit=10000',
+        },
       },
       {
         test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
         use: {
           loader: 'url-loader?limit=100',
-        }
-      }
-    ]
+        },
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          { loader: 'file-loader', options: { name: '[name]-[contenthash].[ext]' } },
+        ],
+      },
+    ],
   },
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebPackPlugin({
+      filename: path.resolve(__dirname, '../dist/index.html'),
       template: path.resolve(__dirname, '../index.html'),
-      filename: path.resolve(__dirname, '../dist/index.html')
     }),
-    new MiniCssExtractPlugin({
-      filename: 'bundle.css',
-    })
   ]
 }

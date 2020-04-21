@@ -14,7 +14,7 @@ module.exports = merge(common, {
   ],
 
   output: {
-    filename: 'bundle-[hash:8].js',
+    filename: 'js/bundle-[hash:8].js',
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
   },
@@ -22,7 +22,7 @@ module.exports = merge(common, {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'bundle-[hash:8].css',
+      filename: 'css/bundle-[hash:8].css',
     }),
   ]
 })

@@ -19,10 +19,10 @@ USER root
 RUN mkdir -p /var/cache/nginx
 RUN chown -R nginx:nginx /var/cache/nginx
 RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx/nginx.conf /etc/nginx/
-COPY nginx/example.com.conf /etc/nginx/conf.d/
+COPY config/nginx/nginx.conf /etc/nginx/
+COPY config/nginx/example.com.conf /etc/nginx/conf.d/
 RUN mkdir -p /etc/nginx/headers.d
-COPY nginx/headers.conf /etc/nginx/headers.d/
+COPY config/nginx/headers.conf /etc/nginx/headers.d/
 
 USER nginx
 

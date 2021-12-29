@@ -7,9 +7,9 @@ ENV ENV_NAME ${ENV_NAME}
 
 WORKDIR /build
 COPY package.json yarn.lock /build/
-RUN yarn
+RUN npm
 COPY . /build/
-RUN yarn build:${ENV_NAME}
+RUN npm build:${ENV_NAME}
 
 FROM nginxinc/nginx-unprivileged:${NGINX_VERSION}
 COPY --from=builder /build/dist /usr/share/nginx/html/

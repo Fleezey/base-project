@@ -1,10 +1,11 @@
 const webpack = require('webpack')
+const { merge } = require('webpack-merge')
 const path = require('path')
+const common = require('./common.config.js')
 
-const HtmlWebPackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
-module.exports = {
+module.exports = merge(common, {
   mode: 'development',
   devtool: 'eval-source-map',
   target: 'web',
@@ -16,34 +17,9 @@ module.exports = {
   ],
 
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
-  },
-
-  optimization: {
-    runtimeChunk: {
-      name: 'runtime',
-    },
-
-    splitChunks: {
-      cacheGroups: {
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          priority: 20,
-          enforce: true,
-        },
-        vendor: {
-          name: 'vendor',
-          chunks: 'all',
-          priority: 10,
-          enforce: true,
-          test: /node_modules/,
-        }
-      }
-    }
   },
 
   resolve: {
@@ -57,65 +33,10 @@ module.exports = {
     hot: true,
   },
 
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      },
-      {
-        test: /\.html$/,
-        use: {
-          loader: 'html-loader'
-        }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { hmr: true },
-          },
-          { loader: 'css-loader', options: { modules: { localIdentName: '[path][name]--[local]' } } },
-        ]
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { hmr: true },
-          },
-          { loader: 'css-loader', options: { modules: { localIdentName: '[path][name]--[local]' } } },
-          { loader: 'sass-loader' }
-        ]
-      },
-      {
-        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: {
-          loader: 'url-loader?limit=10000'
-        }
-      },
-      {
-        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-        use: {
-          loader: 'url-loader?limit=100',
-        }
-      }
-    ]
-  },
-
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebPackPlugin({
-      template: path.resolve(__dirname, '../index.html'),
-      filename: path.resolve(__dirname, '../dist/index.html')
-    }),
     new MiniCssExtractPlugin({
-      filename: 'bundle.css',
+      filename: '[name].css',
     })
   ]
-}
+})

@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const path = require('path')
 
 const HtmlWebPackPlugin = require("html-webpack-plugin")
@@ -8,7 +7,8 @@ module.exports = {
   target: 'web',
   
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
+    chunkFilename: '[name].js',
     path: path.resolve(__dirname, '../dist'),
     publicPath: path.resolve(__dirname, '../dist'),
   },
@@ -61,40 +61,61 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
+          { loader: MiniCssExtractPlugin.loader },
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: { hmr: true },
+            loader: 'css-loader',
+            options: {
+              modules: {
+                exportGlobals: true,
+                localIdentName: '[path][name]--[local]',
+                namedExport: true,
+              },
+            },
           },
-          { loader: 'css-loader', options: { modules: { localIdentName: '[path][name]--[local]' } } },
         ],
       },
       {
         test: /\.scss$/,
         use: [
+          { loader: MiniCssExtractPlugin.loader },
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: { hmr: true },
+            loader: 'css-loader',
+            options: {
+              modules: {
+                exportGlobals: true,
+                localIdentName: '[path][name]--[local]',
+                namedExport: true,
+              },
+            },
           },
-          { loader: 'css-loader', options: { modules: { localIdentName: '[path][name]--[local]' } } },
           { loader: 'sass-loader' },
         ],
       },
       {
         test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         use: {
-          loader: 'url-loader?limit=10000',
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+          },
         },
       },
       {
         test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
         use: {
-          loader: 'url-loader?limit=100',
+          loader: 'url-loader',
+          options: {
+            limit: 100,
+          },
         },
       },
       {
         test: /\.(png|jpg|gif)$/,
         use: [
-          { loader: 'file-loader', options: { name: '[name]-[contenthash].[ext]' } },
+          {
+            loader: 'file-loader',
+            options: { name: '[name]-[contenthash].[ext]' },
+          },
         ],
       },
     ],

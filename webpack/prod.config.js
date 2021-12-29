@@ -1,5 +1,5 @@
 const path = require('path')
-const merge = require('webpack-merge')
+const { merge } = require('webpack-merge')
 const common = require('./common.config.js')
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -14,7 +14,8 @@ module.exports = merge(common, {
   ],
 
   output: {
-    filename: 'js/bundle-[hash:8].js',
+    filename: 'js/[name]-[hash:8].js',
+    chunkFilename: 'js/[name]-[hash:8].js',
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
   },
@@ -22,7 +23,7 @@ module.exports = merge(common, {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'css/bundle-[hash:8].css',
+      filename: 'css/[name]-[hash:8].css',
     }),
   ]
 })

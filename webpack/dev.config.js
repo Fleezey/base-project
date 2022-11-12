@@ -1,19 +1,20 @@
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const path = require('path')
+const fastRefresh = require('react-refresh/babel')
 const common = require('./common.config.js')
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = merge(common, {
   mode: 'development',
   devtool: 'eval-source-map',
   target: 'web',
-  
+
   entry: [
-    'react-hot-loader/patch',
+    "webpack-hot-middleware/client",
     path.resolve(__dirname, '../src/index.js'),
-    'webpack-hot-middleware/client',
   ],
 
   output: {
@@ -33,8 +34,28 @@ module.exports = merge(common, {
     hot: true,
   },
 
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: [fastRefresh],
+          }
+        },
+      },
+    ],
+  },
+
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin({
+      overlay: {
+        sockIntegration: "whm",
+      },
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     })

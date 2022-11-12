@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
   target: 'web',
-  
+
   output: {
     filename: '[name].js',
     chunkFilename: '[name].js',
@@ -45,13 +45,6 @@ module.exports = {
 
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
       {
         test: /\.html$/,
         use: {

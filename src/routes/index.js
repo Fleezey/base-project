@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root'
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
@@ -38,4 +37,4 @@ const AppRoutes = () => (
   </React.Suspense>
 )
 
-export default hot(Routes)
+export default Routes

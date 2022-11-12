@@ -2,8 +2,8 @@ const path = require('path')
 const { merge } = require('webpack-merge')
 const common = require('./common.config.js')
 
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = merge(common, {
   devtool: 'none',
@@ -18,6 +18,18 @@ module.exports = merge(common, {
     chunkFilename: 'js/[name]-[hash:8].js',
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+    ]
   },
 
   plugins: [

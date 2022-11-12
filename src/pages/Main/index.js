@@ -4,8 +4,7 @@ import { makeurl } from 'routes'
 import { Link } from 'react-router-dom'
 import Counter from 'components/counter'
 
-
-export default props => (
+const Main = (props) => (
   <main>
     <Counter />
 
@@ -14,3 +13,5 @@ export default props => (
     </div>
   </main>
 )
+
+export default Main

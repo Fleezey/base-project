@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
+import React  from 'react'
 import { Redirect } from 'react-router-dom'
 
 
-export default class NotFound extends Component {
-  render = () => <div>404 Page not Found!</div>
-}
+const NotFound = () => <div>404 Page not Found!</div>
 
 function NotFoundRedirect({ location }) {
   return <Redirect to={{ ...location, state: { is404: true } }} />
 }
 
+
 NotFound.Redirect = NotFoundRedirect
+
+export default NotFound

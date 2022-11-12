@@ -1,4 +1,7 @@
 import React from 'react'
 
 
-export default () => <div>This page has been lazy loaded</div>
+const Secondary = () => <div>This page has been lazy loaded</div>
+
+
+export default Secondary

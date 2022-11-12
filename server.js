@@ -2,7 +2,6 @@ const express = require('express')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
-const history = require('connect-history-api-fallback');
 const path = require('path')
 
 const app = express()

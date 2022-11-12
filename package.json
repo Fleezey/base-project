@@ -19,6 +19,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.9",
     "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.5.1",
@@ -28,8 +29,7 @@
     "html-webpack-plugin": "^5.5.0",
     "imports-loader": "^3.1.1",
     "mini-css-extract-plugin": "^2.4.5",
-    "redux-devtools": "^3.5.0",
-    "redux-logger": "^3.0.6",
+    "react-refresh": "^0.14.0",
     "resolve-url-loader": "^4.0.0",
     "sass": "^1.45.1",
     "sass-loader": "^12.4.0",
@@ -42,14 +42,12 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "connect-history-api-fallback": "^1.6.0",
+    "@redux-devtools/extension": "^3.2.3",
+    "@reduxjs/toolkit": "^1.9.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hot-loader": "^4.12.9",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.0.1",
-    "redux": "^4.1.2",
-    "redux-data-module": "^1.0.8",
-    "redux-thunk": "^2.4.1"
+    "redux-data-module": "^1.0.8"
   }
 }
